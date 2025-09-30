@@ -15,7 +15,7 @@ int main(void){
     
     //считаем
 
-    for (int i = 0; i<strlen(str); i++) {
+    for (int i = 0; i<strlen(str)+1; i++) {
         if (str[0] == ')'){
             t = false;
             break;
