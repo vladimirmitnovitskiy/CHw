@@ -21,5 +21,5 @@ int main(void) {
     }
     printf("Количество нулевых эллементов: %d\n", count);
 
-    return 0;
+    return 0; 
 }
