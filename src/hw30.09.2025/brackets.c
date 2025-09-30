@@ -28,7 +28,7 @@ int main(void){
         }
     }
     
-    if (countL == countR and t != false){
+    if (countL == countR && t != false){
         printf("Баланс\n");
     }
     else {
