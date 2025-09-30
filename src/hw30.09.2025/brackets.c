@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 int main(void){
     //вводим строку
@@ -7,15 +8,15 @@ int main(void){
     scanf("%s",str);
 
     //инициализируем перменные для подсчёта скобок
-    int countL; // ")"
-    int countR; // "("
+    int countL = 0; // ")"
+    int countR = 0; // "("
 
     bool t = true;
 
     
     //считаем
 
-    for (int i = 0; i<strlen(str)+1; i++) {
+    for (int i = 0; i<strlen(str); i++) {
         if (str[0] == ')'){
             t = false;
             break;
