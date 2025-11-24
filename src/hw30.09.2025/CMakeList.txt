@@ -1,0 +1,1 @@
+add_executable(hw30.09.2025 brackets.c)
