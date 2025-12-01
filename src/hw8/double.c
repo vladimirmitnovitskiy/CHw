@@ -1,15 +1,15 @@
-#include <stdio.h>
 #include <stdint.h>
-
+#include <stdio.h>
 
 typedef union {
     double value;
     uint64_t bits;
 } Number;
 
-int main() {
+int main()
+{
     Number num;
-    
+
     printf("Введите число: ");
     if (scanf("%lf", &num.value) != 1) {
         return 1;
@@ -17,7 +17,6 @@ int main() {
 
     int sign_bit = (num.bits >> 63) & 1;
     char sign_char = sign_bit ? '-' : '+';
-
 
     int raw_exponent = (num.bits >> 52) & 0x7FF;
 
@@ -31,7 +30,7 @@ int main() {
             int p = 1 - 1023;
         }
     }
-    
+
     if (raw_exponent == 0x7FF) {
         printf("Результат: %sInf/NaN\n", sign_char == '+' ? "+" : "-");
         return 0;
