@@ -1,3 +1,4 @@
 project(BinarySum C)
 
 add_executable(binview main.c bin.c)
+add_executable(double_task main.c)
