@@ -4,4 +4,3 @@
 void print_binary(int num);
 
 #endif
-

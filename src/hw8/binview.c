@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "bin.h"
+#include <stdio.h>
 
 int main(void)
 {
@@ -26,7 +26,8 @@ int main(void)
     printf("  (%d)\n", num2);
 
     printf("  ");
-    for (int i = 0; i < 39; i++) printf("-");
+    for (int i = 0; i < 39; i++)
+        printf("-");
     printf("\n");
 
     printf("  ");
