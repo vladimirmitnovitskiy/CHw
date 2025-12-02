@@ -1,29 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap(int *a, int *b)
+void swap(int* a, int* b)
 {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-void reverse(int *x, int start, int end)
+void reverse(int* x, int start, int end)
 {
-    while (start < end)
-    {
+    while (start < end) {
         swap(&x[start], &x[end]);
         start++;
         end--;
     }
-    
 }
 
-void swap_blocks(int *x, int m, int n)
+void swap_blocks(int* x, int m, int n)
 {
     reverse(x, 0, m - 1);
     reverse(x, m, m + n - 1);
-    reverse(x, 0, m + n -1);
+    reverse(x, 0, m + n - 1);
 }
 
 int main(void)
@@ -37,7 +35,7 @@ int main(void)
 
     int total_len = m + n;
 
-    int *x = (int*)malloc(total_len * sizeof(int));
+    int* x = (int*)malloc(total_len * sizeof(int));
 
     if (x == NULL) {
         printf("Ошибка: Не удалось выделить память!\n");
@@ -66,5 +64,4 @@ int main(void)
     free(x);
 
     return 0;
-
 }
