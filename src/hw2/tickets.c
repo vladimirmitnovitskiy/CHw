@@ -13,16 +13,16 @@ int main(void)
         }
     }
 
-    long long total_lucky_tickets = 0;
+    long long totalLuckyTickets = 0;
 
     for (int k = 0; k <= 27; k++) {
         long long combinations = ways[k];
-        long long combinations_squared = combinations * combinations;
+        long long combinationsSquared = combinations * combinations;
 
-        total_lucky_tickets += combinations_squared;
+        totalLuckyTickets += combinationsSquared;
     }
 
-    printf("Общее число счастливых билетов: %lld\n", total_lucky_tickets);
+    printf("Общее число счастливых билетов: %lld\n", totalLuckyTickets);
 
     return 0;
 }
