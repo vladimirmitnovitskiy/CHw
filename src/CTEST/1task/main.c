@@ -17,10 +17,8 @@ int main(void)
     int l = 1;
 
     initArray(&a, 2);
-    while (l>0)
-    {
-        
-    
+    while (l > 0) {
+
         printf("Введите набор целых чисел (конец ввод - 0): ");
 
         int inp = 1;
