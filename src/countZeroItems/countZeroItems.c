@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main(void) {
+int main(void)
+{
 
     int n = 0;
 
@@ -13,7 +14,7 @@ int main(void) {
     for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
-    //считаем нули
+    // считаем нули
     for (int i = 0; i < n; i++) {
         if (arr[i] == 0) {
             count++;
@@ -21,5 +22,5 @@ int main(void) {
     }
     printf("Количество нулевых эллементов: %d\n", count);
 
-    return 0; 
+    return 0;
 }
