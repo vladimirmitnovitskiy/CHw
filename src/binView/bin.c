@@ -1,7 +1,8 @@
-#include <stdio.h>
 #include "bin.h"
+#include <stdio.h>
 
-void print_binary(int num) {
+void print_binary(int num)
+{
     for (int i = 31; i >= 0; i--) {
         // Сдвигаем число вправо на i и берем последний бит (& 1)
         int bit = (num >> i) & 1;
