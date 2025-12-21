@@ -1,0 +1,1 @@
+add_executable(optimalSort optimalSort.c sort.c)
