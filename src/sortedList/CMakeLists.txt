@@ -1,0 +1,1 @@
+add_executable(sortedList interface.c sortedList.c)
