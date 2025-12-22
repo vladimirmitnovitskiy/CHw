@@ -79,7 +79,7 @@ bool bracketBalance(char* str)
 
 int main()
 {
-    int len;
+    int len = 0;
 
     printf("Введите строку: ");
     char* s = getString(&len);
