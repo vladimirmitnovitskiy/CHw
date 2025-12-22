@@ -1,9 +1,8 @@
+#include "stack.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
-#include "stack.h"
-
 
 char* getString(int* len)
 {
@@ -34,9 +33,8 @@ bool bracketBalance(char* str)
     int len = strlen(str);
     Stack* brackets = initStack();
 
-    for (int i = 0; i < len; i++){
-        switch (str[i])
-        {
+    for (int i = 0; i < len; i++) {
+        switch (str[i]) {
         case '(':
             push(brackets, 1);
             break;
@@ -75,7 +73,7 @@ bool bracketBalance(char* str)
 
     bool result = isEmpty(brackets);
     deleteStack(brackets);
-    
+
     return result;
 }
 

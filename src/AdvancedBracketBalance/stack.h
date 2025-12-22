@@ -2,14 +2,14 @@
 
 #include <stdbool.h>
 
-typedef struct StackNode{
+typedef struct StackNode {
     int value;
     struct StackNode* next;
 } StackNode;
 
-typedef struct{
+typedef struct {
     StackNode* head;
-}Stack;
+} Stack;
 
 Stack* initStack();
 void push(Stack* stack, int value);
