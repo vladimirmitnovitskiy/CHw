@@ -1,0 +1,3 @@
+add_subdirectory(countZeroItems)
+add_subdirectory(simpleBracketBalance)
+add_subdirectory(searchSubstring)
