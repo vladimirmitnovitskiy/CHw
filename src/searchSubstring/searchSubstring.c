@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int countOcc(char *s, char *s1)
+int countOcc(char* s, char* s1)
 {
     int count = 0;
     while ((s = strstr(s, s1)) != NULL) {
@@ -10,7 +10,6 @@ int countOcc(char *s, char *s1)
     }
     return count;
 }
-
 
 int main(void)
 {
