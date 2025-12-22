@@ -1,0 +1,1 @@
+add_executable(ShuntingYard shuntingYard.c converter.c stack.c)
