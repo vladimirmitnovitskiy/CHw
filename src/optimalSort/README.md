@@ -31,4 +31,4 @@ gcc optimalSort.c sort.c -o oprimalSort
 ### Для сборки бинарника сортировки
 ```bash
 gcc sort.c -S -O1
-```
+``` 
