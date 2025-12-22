@@ -3,20 +3,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *getString(int* len)
+char* getString(int* len)
 {
     *len = 0;
     int cap = 1;
-    char* s = (char* ) malloc(sizeof(char));
+    char* s = (char*)malloc(sizeof(char));
 
     char c = getchar();
 
-    while (c != '\n'){
+    while (c != '\n') {
         s[(*len)++] = c;
 
         if (*len >= cap) {
             cap *= 2;
-            s = (char*) realloc(s, cap * sizeof(char));
+            s = (char*)realloc(s, cap * sizeof(char));
         }
 
         c = getchar();
@@ -24,22 +24,22 @@ char *getString(int* len)
 
     s[*len] = '\0';
 
-    return s;    
+    return s;
 }
 
 bool balance(char* stream)
 {
     long balance = 0;
-    bool error_found = false;
+    bool errorFound = false;
     int len = strlen(stream);
 
-    for (int i = 0; i<len; i++) {
+    for (int i = 0; i < len; i++) {
 
-        if (stream[i] == '\n' && stream[i] == EOF){
+        if (stream[i] == '\n' && stream[i] == EOF) {
             break;
         }
 
-        if (error_found) {
+        if (errorFound) {
             continue;
         }
 
@@ -50,11 +50,11 @@ bool balance(char* stream)
         }
 
         if (balance < 0) {
-            error_found = true;
+            errorFound = true;
         }
     }
 
-    return !error_found && (balance == 0);
+    return !errorFound && (balance == 0);
 }
 
 int main()
@@ -62,7 +62,7 @@ int main()
     int len;
 
     printf("Введите строку: ");
-    char *s = getString(&len);
+    char* s = getString(&len);
     if (balance(s)) {
         printf("Баланс соблюдён\n");
     } else {
