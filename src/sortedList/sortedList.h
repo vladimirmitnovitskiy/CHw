@@ -1,11 +1,20 @@
 #pragma once
 
-typedef struct sortedList {
-    int value;
-    struct sortedList* next;
-} sortedList;
+#include <stdbool.h>
 
-void add(sortedList** head, int value);
-void dell(sortedList** head, int value);
-void printList(sortedList* head);
-void freeList(sortedList** head);
+
+typedef struct Num {
+    int value;
+    struct Num* next;
+} Num;
+
+typedef struct{
+    Num* head;
+} SortedList;
+
+
+SortedList* initList();
+bool add(SortedList* sList, int value);
+bool deleteByValue(SortedList* sList, int value);
+void printList(SortedList* sList);
+void freeList(SortedList* sList);

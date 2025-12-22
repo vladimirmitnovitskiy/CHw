@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    sortedList* sList = NULL;
+    SortedList* sList = initList();
     int command = 0;
 
     while (1) {
@@ -17,21 +17,22 @@ int main(void)
         int value = 0;
         switch (command) {
         case 0:
-            freeList(&sList);
+            freeList(sList);
             return 0;
         case 1:
             scanf("%d", &value);
-            add(&sList, value);
+            add(sList, value);
             break;
         case 2:
             scanf("%d", &value);
-            dell(&sList, value);
+            deleteByValue(sList, value);
             break;
         case 3:
             printList(sList);
             break;
         default:
             printf("Неверная команада!\n");
+            break;
         }
     }
 }
