@@ -49,14 +49,14 @@ void infixToPostfix(const char* expr)
         } else if (c == ')') {
             while (!isEmpty(&stack) && peek(&stack) != '(')
                 printf("%c ", pop(&stack));
-            
+
             // Удаляем открывающую скобку из стека
             if (!isEmpty(&stack) && peek(&stack) == '(')
                 pop(&stack);
         } else if (isOperator(c)) {
             while (!isEmpty(&stack) && getPrecedence(peek(&stack)) >= getPrecedence(c))
                 printf("%c ", pop(&stack));
-            
+
             push(&stack, c);
         }
 
@@ -68,7 +68,7 @@ void infixToPostfix(const char* expr)
         printf("%c ", pop(&stack));
 
     printf("\n");
-    
+
     // Обязательная очистка памяти динамического стека
     destroyStack(&stack);
 }
