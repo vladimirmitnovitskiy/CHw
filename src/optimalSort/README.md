@@ -13,16 +13,22 @@
 * CMake
 
 ### Способ 1 (CMake)
-Заходим в дирректорию CHw/build
+Заходим в дирректорию CHw
 ```bash
-cmake ..
-make
-cd src/optimalSort
+cmake . -B build
+cmake --build build
+cd build/src/optimalSort
 ./optimalSort
 ```
 
 
 ### Способ 2 (GCC)
 ```bash
-gcc optimalSort.c sort.c -o oprimalSort
+gcc optimalSort.c sort.c -o oprimalSort 
 ./optimalSort
+```
+
+### Для сборки бинарника сортировки
+```bash
+gcc sort.c -S -O1
+```
