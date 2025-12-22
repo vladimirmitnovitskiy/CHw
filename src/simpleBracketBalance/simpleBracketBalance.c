@@ -1,21 +1,51 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-bool balance(FILE* stream)
+char *getString(int* len)
 {
-    int c = 0;
+    *len = 0;
+    int cap = 1;
+    char* s = (char* ) malloc(sizeof(char));
+
+    char c = getchar();
+
+    while (c != '\n'){
+        s[(*len)++] = c;
+
+        if (*len >= cap) {
+            cap *= 2;
+            s = (char*) realloc(s, cap * sizeof(char));
+        }
+
+        c = getchar();
+    }
+
+    s[*len] = '\0';
+
+    return s;    
+}
+
+bool balance(char* stream)
+{
     long balance = 0;
     bool error_found = false;
+    int len = strlen(stream);
 
-    while ((c = fgetc(stream)) != '\n' && c != EOF) {
+    for (int i = 0; i<len; i++) {
+
+        if (stream[i] == '\n' && stream[i] == EOF){
+            break;
+        }
 
         if (error_found) {
             continue;
         }
 
-        if (c == '(') {
+        if (stream[i] == '(') {
             balance++;
-        } else if (c == ')') {
+        } else if (stream[i] == ')') {
             balance--;
         }
 
@@ -29,13 +59,17 @@ bool balance(FILE* stream)
 
 int main()
 {
-    printf("Введите строку: ");
+    int len;
 
-    if (balance(stdin)) {
+    printf("Введите строку: ");
+    char *s = getString(&len);
+    if (balance(s)) {
         printf("Баланс соблюдён\n");
     } else {
         printf("Баланс НЕ соблюдён\n");
     }
+
+    free(s);
 
     return 0;
 }
