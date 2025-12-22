@@ -2,16 +2,14 @@
 
 #include <stdbool.h>
 
-
 typedef struct Num {
     int value;
     struct Num* next;
 } Num;
 
-typedef struct{
+typedef struct {
     Num* head;
 } SortedList;
-
 
 SortedList* initList();
 bool add(SortedList* sList, int value);

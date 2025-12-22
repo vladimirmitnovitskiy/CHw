@@ -1,7 +1,7 @@
 #include "sortedList.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 /**
  * @brief Initializes a new empty sorted list.
@@ -14,8 +14,8 @@
 SortedList* initList()
 {
     SortedList* sList = malloc(sizeof(SortedList));
-    if (sList){
-        sList -> head = NULL;
+    if (sList) {
+        sList->head = NULL;
     }
     return sList;
 }
@@ -33,22 +33,23 @@ SortedList* initList()
 bool add(SortedList* sList, int value)
 {
     Num* newNum = malloc(sizeof(Num));
-    if (!newNum) return false;
-    newNum -> value = value;
+    if (!newNum)
+        return false;
+    newNum->value = value;
 
-    if (sList -> head == NULL || sList -> head -> value >= value){
-        newNum -> next = sList -> head;
-        sList -> head = newNum;
+    if (sList->head == NULL || sList->head->value >= value) {
+        newNum->next = sList->head;
+        sList->head = newNum;
         return true;
     }
 
-    Num* current = sList -> head;
-    while (current -> next != NULL && current -> next -> value < value){
-        current = current -> next;
+    Num* current = sList->head;
+    while (current->next != NULL && current->next->value < value) {
+        current = current->next;
     }
 
-    newNum -> next = current ->next;
-    current -> next = newNum;
+    newNum->next = current->next;
+    current->next = newNum;
     return true;
 }
 
@@ -64,11 +65,11 @@ bool add(SortedList* sList, int value)
  */
 bool deleteByValue(SortedList* sList, int value)
 {
-    if (sList == NULL || sList->head == NULL) return false;
+    if (sList == NULL || sList->head == NULL)
+        return false;
 
     Num* temp = sList->head;
     Num* prev = NULL;
-
 
     if (temp != NULL && temp->value == value) {
         sList->head = temp->next;
@@ -76,13 +77,13 @@ bool deleteByValue(SortedList* sList, int value)
         return true;
     }
 
-
     while (temp != NULL && temp->value != value) {
         prev = temp;
         temp = temp->next;
     }
 
-    if (temp == NULL) return false;
+    if (temp == NULL)
+        return false;
 
     prev->next = temp->next;
     free(temp);
@@ -99,7 +100,8 @@ bool deleteByValue(SortedList* sList, int value)
  */
 void printList(SortedList* sList)
 {
-    if (sList == NULL) return;
+    if (sList == NULL)
+        return;
     Num* current = sList->head;
     printf("Список: ");
     while (current != NULL) {
@@ -119,7 +121,8 @@ void printList(SortedList* sList)
  */
 void freeList(SortedList* sList)
 {
-    if (sList == NULL) return;
+    if (sList == NULL)
+        return;
 
     Num* current = sList->head;
     Num* next;
