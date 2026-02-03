@@ -1,0 +1,1 @@
+int isBalanced(const char *str);
