@@ -10,7 +10,6 @@ typedef enum {
     BRACKET_CURLY = 3
 } BracketType;
 
-
 char* getString(int* len)
 {
     *len = 0;
@@ -85,7 +84,7 @@ bool bracketBalance(char* str)
             break;
         }
 
-        if(!isBalanced) {
+        if (!isBalanced) {
             break;
         }
     }
