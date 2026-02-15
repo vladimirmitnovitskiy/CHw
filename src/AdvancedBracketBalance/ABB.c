@@ -4,6 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef enum {
+    BRACKET_ROUND = 1,
+    BRACKET_SQUARE = 2,
+    BRACKET_CURLY = 3
+} BracketType;
+
+
 char* getString(int* len)
 {
     *len = 0;
@@ -33,48 +40,63 @@ bool bracketBalance(char* str)
     int len = strlen(str);
     Stack* brackets = initStack();
 
+    bool isBalanced = true;
+
     for (int i = 0; i < len; i++) {
         switch (str[i]) {
         case '(':
-            push(brackets, 1);
+            push(brackets, BRACKET_ROUND);
             break;
         case '[':
-            push(brackets, 2);
+            push(brackets, BRACKET_SQUARE);
             break;
         case '{':
-            push(brackets, 3);
+            push(brackets, BRACKET_CURLY);
             break;
 
         case ')':
-            if (pop(brackets) != 1) {
-                deleteStack(brackets);
-                return false;
+            if (isEmpty(brackets)) {
+                break;
+            }
+            if (pop(brackets) != BRACKET_ROUND) {
+                isBalanced = false;
             }
             break;
 
         case ']':
-            if (pop(brackets) != 2) {
-                deleteStack(brackets);
-                return false;
+            if (isEmpty(brackets)) {
+                break;
+            }
+            if (pop(brackets) != BRACKET_SQUARE) {
+                isBalanced = false;
             }
             break;
 
         case '}':
-            if (pop(brackets) != 3) {
-                deleteStack(brackets);
-                return false;
+            if (isEmpty(brackets)) {
+                break;
+            }
+            if (pop(brackets) != BRACKET_CURLY) {
+                isBalanced = false;
             }
             break;
 
         default:
             break;
         }
+
+        if(!isBalanced) {
+            break;
+        }
     }
 
-    bool result = isEmpty(brackets);
+    if (isBalanced) {
+        isBalanced = isEmpty(brackets);
+    }
+
     deleteStack(brackets);
 
-    return result;
+    return isBalanced;
 }
 
 int main()
