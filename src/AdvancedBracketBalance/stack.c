@@ -4,6 +4,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct StackNode {
+    int value;
+    struct StackNode* next;
+} StackNode;
+
+struct Stack {
+    StackNode* head;
+};
+
 Stack* initStack()
 {
     Stack* stack = malloc(sizeof(Stack));
@@ -26,9 +35,6 @@ bool isEmpty(Stack* stack)
 
 int pop(Stack* stack)
 {
-    if (isEmpty(stack))
-        return -1;
-
     StackNode* currentNode = stack->head;
     int value = currentNode->value;
     stack->head = currentNode->next;
@@ -46,8 +52,5 @@ void deleteStack(Stack* stack)
 
 int peek(Stack* stack)
 {
-    if (isEmpty(stack))
-        return -1;
-
     return stack->head->value;
 }
