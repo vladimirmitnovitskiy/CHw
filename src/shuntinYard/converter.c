@@ -1,8 +1,11 @@
-#include "converter.h"
-#include "stack.h"
-#include <ctype.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include "stack.h"
 #include <string.h>
+#include <ctype.h>
+
+#define MAX 100
 
 static int getPrecedence(char op)
 {
@@ -18,57 +21,74 @@ static bool isOperator(char c)
     return c == '+' || c == '-' || c == '*' || c == '/';
 }
 
-void infixToPostfix(const char* expr)
+char* infixToPostfix(const char* str)
 {
-    Stack stack;
-    initializeStack(&stack);
+    Stack* stack = initStack();
 
     int i = 0;
-    int len = (int)strlen(expr);
+    int k = 0;
+    char* postfix = malloc(MAX * sizeof(char));
+    if (!postfix){
+        return NULL;
+    }
 
-    while (i < len) {
-        char c = expr[i];
-
-        if (isspace(c)) {
+    while (str[i] != '\0'){
+        if (isspace(str[i])){
             i++;
             continue;
         }
 
-        if (isdigit(c)) {
-            // Читаем число целиком (включая дробную часть)
-            while (i < len && (isdigit(expr[i]) || expr[i] == '.')) {
-                printf("%c", expr[i]);
-                i++;
-            }
-            printf(" ");
-            continue;
+        if (isdigit(str[i])){
+            postfix[k++] = str[i];
+            postfix[k++] = ' ';
+        }
+        else if (str[i] == '('){
+            push(stack, str[i]);
         }
 
-        if (c == '(') {
-            push(&stack, c);
-        } else if (c == ')') {
-            while (!isEmpty(&stack) && peek(&stack) != '(')
-                printf("%c ", pop(&stack));
+        else if (str[i] == ')')
+        {
+            while (!isEmpty(stack) && peek(stack) != '(')
+            {
+                postfix[k++] = pop(stack);
+                postfix[k++] = ' ';
+            }
+            
+            if (!isEmpty(stack)){
+                pop(stack);
+            }
+            else{
+                printf("Ошибка баланса скобок\n");
+                return NULL;
+            }
+        }
+        
+        else if (isOperator(str[i])){
+            while (!isEmpty(stack) && getPrecedence(peek(stack)) >= getPrecedence(str[i])){
+                postfix[k++] = pop(stack);
+                postfix[k++] = ' ';
+            }
+            push(stack, str[i]);
 
-            // Удаляем открывающую скобку из стека
-            if (!isEmpty(&stack) && peek(&stack) == '(')
-                pop(&stack);
-        } else if (isOperator(c)) {
-            while (!isEmpty(&stack) && getPrecedence(peek(&stack)) >= getPrecedence(c))
-                printf("%c ", pop(&stack));
-
-            push(&stack, c);
         }
 
         i++;
     }
 
-    // Выводим оставшиеся операторы
-    while (!isEmpty(&stack))
-        printf("%c ", pop(&stack));
+    while (!isEmpty(stack))
+    {
+        char head = pop(stack);
+        if (head == '('){
+            printf("Ошибка баланса скобок\n");
+            return NULL;
+        }
+        postfix[k++] = head;
+        postfix[k++] = ' ';
+    }
 
-    printf("\n");
-
-    // Обязательная очистка памяти динамического стека
-    destroyStack(&stack);
+    postfix[k] = '\0';
+    
+    deleteStack(stack);
+    
+    return postfix;
 }

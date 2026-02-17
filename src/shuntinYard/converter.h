@@ -1,3 +1,3 @@
 #pragma once
 
-void infixToPostfix(const char* expr);
+char* infixToPostfix(const char* str);
