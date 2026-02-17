@@ -1,6 +1,7 @@
 #include "converter.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -12,8 +13,9 @@ int main(void)
 
     str[strcspn(str, "\n")] = 0;
 
-    printf("Постфиксная форма: ");
-    infixToPostfix(str);
-
+    char* postfix = infixToPostfix(str);
+    printf("Постфиксная форма: %s\n", postfix);
+    
+    free(postfix);
     return 0;
 }
