@@ -24,7 +24,6 @@ static bool isOperator(char c)
 char* infixToPostfix(const char* str)
 {
     Stack* stack = initStack();
-
     int i = 0;
     int k = 0;
     char* postfix = malloc(MAX * sizeof(char));
