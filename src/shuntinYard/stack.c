@@ -53,4 +53,5 @@ void deleteStack(Stack* stack)
 int peek(Stack* stack)
 {
     return stack->head->value;
+
 }
