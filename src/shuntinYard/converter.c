@@ -1,9 +1,9 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include "stack.h"
-#include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define MAX 100
 
@@ -27,57 +27,51 @@ char* infixToPostfix(const char* str)
     int i = 0;
     int k = 0;
     char* postfix = malloc(MAX * sizeof(char));
-    if (!postfix){
+    if (!postfix) {
         return NULL;
     }
 
-    while (str[i] != '\0'){
-        if (isspace(str[i])){
+    while (str[i] != '\0') {
+        if (isspace(str[i])) {
             i++;
             continue;
         }
 
-        if (isdigit(str[i])){
+        if (isdigit(str[i])) {
             postfix[k++] = str[i];
             postfix[k++] = ' ';
-        }
-        else if (str[i] == '('){
+        } else if (str[i] == '(') {
             push(stack, str[i]);
         }
 
-        else if (str[i] == ')')
-        {
-            while (!isEmpty(stack) && peek(stack) != '(')
-            {
+        else if (str[i] == ')') {
+            while (!isEmpty(stack) && peek(stack) != '(') {
                 postfix[k++] = pop(stack);
                 postfix[k++] = ' ';
             }
-            
-            if (!isEmpty(stack)){
+
+            if (!isEmpty(stack)) {
                 pop(stack);
-            }
-            else{
+            } else {
                 printf("Ошибка баланса скобок\n");
                 return NULL;
             }
         }
-        
-        else if (isOperator(str[i])){
-            while (!isEmpty(stack) && getPrecedence(peek(stack)) >= getPrecedence(str[i])){
+
+        else if (isOperator(str[i])) {
+            while (!isEmpty(stack) && getPrecedence(peek(stack)) >= getPrecedence(str[i])) {
                 postfix[k++] = pop(stack);
                 postfix[k++] = ' ';
             }
             push(stack, str[i]);
-
         }
 
         i++;
     }
 
-    while (!isEmpty(stack))
-    {
+    while (!isEmpty(stack)) {
         char head = pop(stack);
-        if (head == '('){
+        if (head == '(') {
             printf("Ошибка баланса скобок\n");
             return NULL;
         }
@@ -86,8 +80,8 @@ char* infixToPostfix(const char* str)
     }
 
     postfix[k] = '\0';
-    
+
     deleteStack(stack);
-    
+
     return postfix;
 }
