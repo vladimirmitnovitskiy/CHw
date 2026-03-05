@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 100
 
 static int getPrecedence(char op)
 {
@@ -21,13 +20,19 @@ static bool isOperator(char c)
     return c == '+' || c == '-' || c == '*' || c == '/';
 }
 
-char* infixToPostfix(const char* str)
+char* infixToPostfix(const char* str, int* errorCode)
 {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     Stack* stack = initStack();
     int i = 0;
     int k = 0;
-    char* postfix = malloc(MAX * sizeof(char));
+    char* postfix = malloc((2 * strlen(str) + 1) * sizeof(char));
     if (!postfix) {
+        if (errorCode != NULL) *errorCode = 2; //2 - ошибка выделения памяти
+        deleteStack(stack);
         return NULL;
     }
 
@@ -53,7 +58,11 @@ char* infixToPostfix(const char* str)
             if (!isEmpty(stack)) {
                 pop(stack);
             } else {
-                printf("Ошибка баланса скобок\n");
+                if (errorCode != NULL){
+                    *errorCode = 1; // 1 - ошибка баланса скобок
+                }
+                free(postfix);
+                deleteStack(stack);
                 return NULL;
             }
         }
@@ -72,7 +81,11 @@ char* infixToPostfix(const char* str)
     while (!isEmpty(stack)) {
         char head = pop(stack);
         if (head == '(') {
-            printf("Ошибка баланса скобок\n");
+            if (errorCode != NULL){
+                    *errorCode = 1; // 1 - ошибка баланса скобок
+                }
+            free(postfix);
+            deleteStack(stack);
             return NULL;
         }
         postfix[k++] = head;
