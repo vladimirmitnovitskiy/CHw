@@ -5,9 +5,8 @@
 
 int main(void)
 {
-    char str[200] = { };
+    char str[200] = {};
     int error = 0;
-
 
     printf("Введите выражение (не больше 200 символов): ");
     if (!fgets(str, sizeof(str), stdin))
@@ -17,13 +16,11 @@ int main(void)
 
     char* postfix = infixToPostfix(str, &error);
 
-    if (error == 1){
+    if (error == 1) {
         printf("Ошибка: Нарушен баланс скобок!\n");
-    }
-    else if (error == 2){
+    } else if (error == 2) {
         printf("Ошибка: Ошибка выделения памяти!\n");
-    }
-    else if (postfix != NULL){
+    } else if (postfix != NULL) {
         printf("Постфиксная форма: %s\n", postfix);
         free(postfix);
     }

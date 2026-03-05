@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 static int getPrecedence(char op)
 {
     if (op == '+' || op == '-')
@@ -31,7 +30,8 @@ char* infixToPostfix(const char* str, int* errorCode)
     int k = 0;
     char* postfix = malloc((2 * strlen(str) + 1) * sizeof(char));
     if (!postfix) {
-        if (errorCode != NULL) *errorCode = 2; //2 - ошибка выделения памяти
+        if (errorCode != NULL)
+            *errorCode = 2; // 2 - ошибка выделения памяти
         deleteStack(stack);
         return NULL;
     }
@@ -58,7 +58,7 @@ char* infixToPostfix(const char* str, int* errorCode)
             if (!isEmpty(stack)) {
                 pop(stack);
             } else {
-                if (errorCode != NULL){
+                if (errorCode != NULL) {
                     *errorCode = 1; // 1 - ошибка баланса скобок
                 }
                 free(postfix);
@@ -81,9 +81,9 @@ char* infixToPostfix(const char* str, int* errorCode)
     while (!isEmpty(stack)) {
         char head = pop(stack);
         if (head == '(') {
-            if (errorCode != NULL){
-                    *errorCode = 1; // 1 - ошибка баланса скобок
-                }
+            if (errorCode != NULL) {
+                *errorCode = 1; // 1 - ошибка баланса скобок
+            }
             free(postfix);
             deleteStack(stack);
             return NULL;
