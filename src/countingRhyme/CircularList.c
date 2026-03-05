@@ -7,7 +7,7 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-struct CircularList{
+struct CircularList {
     Node* tail;
 };
 
@@ -23,7 +23,7 @@ Node* initNode(int id)
 CircularList* initCircularList(int n)
 {
     CircularList* circle = malloc(sizeof(CircularList));
-    if (!circle){
+    if (!circle) {
         return NULL;
     }
 
@@ -48,7 +48,7 @@ CircularList* initCircularList(int n)
 }
 
 int kill(CircularList* circle, int m)
-{   
+{
     if (!circle || !circle->tail)
         return 0;
     if (m <= 0)
@@ -68,7 +68,7 @@ int kill(CircularList* circle, int m)
     }
 
     int survivorId = current->id;
-    
+
     free(current);
     free(circle);
 
