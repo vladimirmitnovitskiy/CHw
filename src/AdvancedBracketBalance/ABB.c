@@ -55,6 +55,7 @@ bool bracketBalance(char* str)
 
         case ')':
             if (isEmpty(brackets)) {
+                isBalanced = false;
                 break;
             }
             if (pop(brackets) != BRACKET_ROUND) {
@@ -64,6 +65,7 @@ bool bracketBalance(char* str)
 
         case ']':
             if (isEmpty(brackets)) {
+                isBalanced = false;
                 break;
             }
             if (pop(brackets) != BRACKET_SQUARE) {
@@ -73,6 +75,7 @@ bool bracketBalance(char* str)
 
         case '}':
             if (isEmpty(brackets)) {
+                isBalanced = false;
                 break;
             }
             if (pop(brackets) != BRACKET_CURLY) {
