@@ -2,6 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Node {
+    int id;
+    struct Node* next;
+} Node;
+
+struct CircularList{
+    Node* tail;
+};
+
 Node* initNode(int id)
 {
     Node* newNode = malloc(sizeof(Node));
@@ -11,9 +20,17 @@ Node* initNode(int id)
     return newNode;
 }
 
-CircularList initCircularList(int n)
+CircularList* initCircularList(int n)
 {
-    CircularList circle = { NULL };
+    CircularList* circle = malloc(sizeof(CircularList));
+    if (!circle){
+        return NULL;
+    }
+
+    if (n <= 0) {
+        circle->tail = NULL;
+        return circle;
+    }
 
     Node* head = initNode(1);
     Node* prev = head;
@@ -25,7 +42,35 @@ CircularList initCircularList(int n)
     }
 
     prev->next = head;
-    circle.tail = prev;
+    circle->tail = prev;
 
     return circle;
+}
+
+int kill(CircularList* circle, int m)
+{   
+    if (!circle || !circle->tail)
+        return 0;
+    if (m <= 0)
+        return 0;
+
+    Node* current = circle->tail;
+
+    while (current->next != current) {
+        for (int i = 1; i < m; i++) {
+            current = current->next;
+        }
+
+        Node* victim = current->next;
+        current->next = victim->next;
+
+        free(victim);
+    }
+
+    int survivorId = current->id;
+    
+    free(current);
+    free(circle);
+
+    return survivorId;
 }

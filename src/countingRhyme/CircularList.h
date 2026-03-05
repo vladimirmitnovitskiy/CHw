@@ -1,13 +1,9 @@
 #pragma once
 
-typedef struct Node {
-    int id;
-    struct Node* next;
-} Node;
 
-typedef struct {
-    Node* tail;
-} CircularList;
+typedef struct CircularList CircularList;
 
-Node* initNode(int n);
-CircularList initCircularList(int n);
+
+
+CircularList* initCircularList(int n);
+int kill(CircularList* circle, int m);
